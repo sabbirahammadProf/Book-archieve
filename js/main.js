@@ -24,7 +24,7 @@ const loadBook = () => {
         // Load books by fetch
         blankAlert('none');
         loader('block');
-        const fetchUrl = `http://openlibrary.org/search.json?q=${searchText}`;
+        const fetchUrl = `https://openlibrary.org/search.json?q=${searchText}`;
         fetch(fetchUrl)
         .then(response => response.json())
         .then(data => showBooks(data));
@@ -60,7 +60,7 @@ const showBooks = books => {
           if (authorName === undefined) {
               authorName = 'Not found author name';
           } else {
-              authorName = book.author_name;
+              authorName = book.author_name[0];
           }
   
           // Publish year validation
@@ -72,11 +72,11 @@ const showBooks = books => {
           }
           
           // Publisher validation
-          let publisher = book.publisher;;
+          let publisher = book.publisher;
           if (publisher === undefined) {
               publisher = 'Not found publisher';
           } else {
-              publisher = book.publisher;
+              publisher = book.publisher[0];
           }
           
           // Set cover image
